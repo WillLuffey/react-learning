@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+
+  .btn-item {
+    width: 20%;
+    height: 100px;
+  }
+
+  figure {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+
+    figcaption {
+      font-size: .8em;
+    }
+  }
+}
+
+// table {
+//   table-layout: fixed;
+//   overflow: hidden;
+//   width: 100%;
+// }
+
+// th, td {
+//   word-wrap: break-word;
+// }
