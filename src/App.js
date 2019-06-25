@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.scss';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class App extends Component {
 
 componentWillMount() {
   fetch('https://www.osrsbox.com/osrsbox-db/items-json-slot/items-2h.json')
+  // fetch('https://www.osrsbox.com/osrsbox-db/items-complete.json')
       .then(response => {
           return response.json();
       })
@@ -30,7 +32,11 @@ setCurrent(id) {
 }
   render() {
     if (this.state.items.length === 0) {
-      return false;
+      return (
+        <div className="load bg-dark text-center">
+          <CircularProgress color="secondary" />
+          </div>
+      );
     }
     console.log(this.state.items)
     if (this.state.current === null) {
@@ -64,6 +70,8 @@ setCurrent(id) {
     </div>
   );
 } else {
+  const item = this.state.items[this.state.current];
+  const imgURL = "https://www.osrsbox.com/osrsbox-db/items-icons/" + item.id + ".png";
   return (
     <div className="App bg-dark text-light">
       <nav class="navbar navbar-expand-sm navbar-dark bg-danger">
@@ -77,36 +85,45 @@ setCurrent(id) {
           </div>
         </div>
       </nav>
-      <div className="container mt-4 text-left">
+      <div className="container mt-4 text-center">
         <button className="btn btn-block btn-danger" onClick={() => this.setCurrent(null)}>
           Return
         </button>
+        <img className="item-preview" src={imgURL} alt="Item"/>
         <div className="table-responsive">
         <table className="table table-sm table-dark">
-        <thead>
           <tr>
             <th>Name</th>
+            <td>{item.name}</td>
+            </tr>
+            <tr>
             <th>ID</th>
+            <td>{item.id}</td>
+            </tr>
+            <tr>
             <th>Examine</th>
+            <td>{item.examine}</td>
+            </tr>
+            <tr>
             <th>Release Date</th>
+            <td>{item.release_date}</td>
+            </tr>
+            <tr>
             <th>Tradeable?</th>
+            <td>{item.tradeable ? "Yes" : "No"}</td>
+            </tr>
+            <tr>
             <th>Buy Limit</th>
+            <td>{item.buy_limit}</td>
+            </tr>
+            <tr>
             <th>High Alch</th>
+            <td>{item.highalch}</td>
+            </tr>
+            <tr>
             <th>Members?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{this.state.items[this.state.current].name}</td>
-            <td>{this.state.items[this.state.current].id}</td>
-            <td>{this.state.items[this.state.current].examine}</td>
-            <td>{this.state.items[this.state.current].release_date}</td>
-            <td>{this.state.items[this.state.current].tradeable ? "Yes" : "No"}</td>
-            <td>{this.state.items[this.state.current].buy_limit}</td>
-            <td>{this.state.items[this.state.current].highalch}</td>
-            <td>{this.state.items[this.state.current].members ? "Yes" : "No"}</td>
-          </tr>
-          </tbody>
+            <td>{item.members ? "Yes" : "No"}</td>
+            </tr>
         </table>
         </div>
       </div>

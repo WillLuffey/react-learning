@@ -15,14 +15,18 @@
       font-size: .8em;
     }
   }
+
+  .item-preview {
+    width: 100px;
+    height: auto;
+    margin: 30px 0;
+  }
 }
 
-// table {
-//   table-layout: fixed;
-//   overflow: hidden;
-//   width: 100%;
-// }
+table {
+  text-align: left;
+}
 
-// th, td {
-//   word-wrap: break-word;
-// }
+.load {
+  height: 100%;
+}
